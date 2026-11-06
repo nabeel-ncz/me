@@ -206,6 +206,8 @@
   }
   .stats li { display: flex; flex-direction: column; gap: 4px; padding: 4px 16px 20px 0; }
   .stats li + li { padding-left: 16px; border-left: 1px solid var(--rule); }
+  .stats a { display: flex; flex-direction: column; gap: 4px; color: inherit; text-decoration: none; outline: none; }
+  .stats a:hover strong, .stats a:focus-visible strong { color: var(--accent); }
   .stats strong { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; }
   .stats span { font-size: 14px; line-height: 1.35; color: var(--muted); }
   .sub { margin: 0 0 14px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
@@ -385,8 +387,8 @@
       <ul class="stats">
         <li><strong>2+ yrs</strong><span>shipping production software</span></li>
         <li><strong>Team lead</strong><span>eCare engineering, Yanthra Labs</span></li>
-        <li><strong>Winner</strong><span>Brocode 2.0 challenge, 2022</span></li>
-        <li><strong>Best of July</strong><span>Best Performer of the Month, 2024</span></li>
+        <li><a href="/achievements/#brocode-2022"><strong>Winner</strong><span>Brocode 2.0 Learning Club, 2022</span></a></li>
+        <li><a href="/achievements/#star-performer-2024"><strong>Star performer</strong><span>Finanshels, July 2024</span></a></li>
       </ul>
 
       <div class="cols">
@@ -560,6 +562,7 @@
 
   <footer>
     <nav aria-label="Find me">
+      <a href="/achievements/">Achievements<span class="arr">→</span></a>
       <a href="https://github.com/nabeel-ncz" target="_blank" rel="noopener">GitHub<span class="arr">↗</span></a>
       <a href="https://www.linkedin.com/in/muhammed-nabeel-b71279254/" target="_blank" rel="noopener">LinkedIn<span class="arr">↗</span></a>
       <a href="https://x.com/nabl_in" target="_blank" rel="noopener">X<span class="arr">↗</span></a>
