@@ -17,6 +17,7 @@
     --muted: #6E7582;
     --rule: #E7E9ED;
     --accent: #1D3FD6;
+    --tint: #F5F7FE;
     --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
@@ -142,6 +143,44 @@
   a.ln:hover, a.ln:focus-visible { color: var(--accent); background-size: 100% 1.5px; outline: none; }
   a.ln .arr { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-left: 3px; }
 
+  /* Current role: the one highlighted block on the page. */
+  .now {
+    display: flex; flex-direction: column; gap: 24px;
+    padding: 28px;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent);
+    background: var(--tint);
+  }
+  .now-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .now-head .label:first-child { color: var(--accent); }
+  .live {
+    position: relative; display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); margin-right: 8px; vertical-align: 1px;
+  }
+  .live::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: var(--accent); animation: ping 2s ease-out infinite;
+  }
+  @keyframes ping { from { transform: scale(1); opacity: .5; } to { transform: scale(3); opacity: 0; } }
+  .now-role h2 {
+    margin: 0; font-size: clamp(26px, 4.4vw, 34px); font-weight: 600;
+    letter-spacing: -0.03em; line-height: 1.15; text-wrap: balance;
+  }
+  a.ln.big { font-size: inherit; font-weight: inherit; letter-spacing: inherit; color: var(--accent);
+    background-size: 100% 2px; }
+  a.ln.big:hover, a.ln.big:focus-visible { background-size: 0 2px; }
+  a.ln.big .arr { font-size: 0.5em; vertical-align: 0.6em; }
+  .now-role p { margin: 10px 0 0; max-width: 54ch; font-size: 17px; line-height: 1.45; color: var(--ink-2); }
+  .products {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+  }
+  .product { background: var(--paper); padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+  .product.flagship { grid-column: 1 / -1; }
+  .product h3 { margin: 4px 0 0; font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
+  .product p { margin: 0; font-size: 15px; line-height: 1.45; color: var(--muted); }
+  .product.flagship p { color: var(--ink-2); max-width: 60ch; }
+
   footer {
     display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
     gap: 16px 32px;
@@ -168,8 +207,10 @@
     .item .year { padding-top: 0; }
     .mini .item .year { padding-top: 0; }
     nav { gap: 8px 20px; }
+    .now { padding: 20px 16px; }
+    .products { grid-template-columns: 1fr; }
   }
-  @media (prefers-reduced-motion: reduce) { a.ln, nav a, header a.label { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { a.ln, nav a, header a.label { transition: none; } .live::after { animation: none; } }
 </style>
 
 <div class="page">
@@ -181,12 +222,86 @@
   <main>
     <section class="intro">
       <h1>Projects<span class="stop">.</span></h1>
-      <p class="lede">Things I've built, shipped for clients, or made to learn something.</p>
+      <p class="lede">What I'm building now, what I've shipped before, and what I made to learn.</p>
+    </section>
+    <section class="now" aria-labelledby="g-now">
+      <div class="now-head">
+        <span class="label" id="g-now"><span class="live" aria-hidden="true"></span>Now</span>
+        <span class="label">Aug 2025 – Present</span>
+      </div>
+      <div class="now-role">
+        <h2>Product Engineer at <a class="ln big" href="https://yanthralabs.com/" target="_blank" rel="noopener">Yanthra Labs<span class="arr">↗</span></a></h2>
+        <p>Building healthcare software used by hospitals, clinics and labs. I lead the eCare engineering team and work across the product suite.</p>
+      </div>
+      <ol class="products">
+        <li class="product flagship">
+          <span class="label">Hospital</span>
+          <h3>eCare360 HMIS</h3>
+          <p>Hospital management for multi-specialty hospitals. I built billing, pharmacy, inventory and reporting, and the modular microservices setup that lets each hospital pick its own modules.</p>
+        </li>
+        <li class="product">
+          <span class="label">Clinic</span>
+          <h3>eClinix360</h3>
+          <p>Clinic and polyclinic management.</p>
+        </li>
+        <li class="product">
+          <span class="label">Lab</span>
+          <h3>eLab360</h3>
+          <p>Laboratory information system.</p>
+        </li>
+        <li class="product">
+          <span class="label">Records</span>
+          <h3>EMR</h3>
+          <p>Electronic medical records.</p>
+        </li>
+        <li class="product">
+          <span class="label">Patients</span>
+          <h3>Patient Appointment &amp; Call Centre</h3>
+          <p>Patient booking and call centre.</p>
+        </li>
+      </ol>
     </section>
 
-    <section class="group" aria-labelledby="g-selected">
+    <section class="group" aria-labelledby="g-work">
       <div class="group-head">
-        <span class="label" id="g-selected">Selected</span>
+        <span class="label" id="g-work">Previously</span>
+        <span class="label count">03</span>
+      </div>
+      <ol>
+        <li class="item">
+          <span class="label year">2025</span>
+          <div class="body">
+            <h2>QR restaurant ordering <span class="kind">Freelance</span></h2>
+            <p>A multi-tenant ordering platform where every restaurant gets its own subdomain, with real-time orders and AWS infrastructure behind it.</p>
+            <p class="stack">Node.js · WebSocket · AWS</p>
+          </div>
+        </li>
+        <li class="item">
+          <span class="label year">2025</span>
+          <div class="body">
+            <h2>KK Tours &amp; Travels <span class="kind">Freelance</span></h2>
+            <p>A travel agency site with tour booking and an admin dashboard for tours, content, and reviews.</p>
+            <p class="stack">TypeScript · Next.js</p>
+            <div class="links">
+              <a class="ln" href="https://kktoursindia.vercel.app" target="_blank" rel="noopener">Live<span class="arr">↗</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="item">
+          <span class="label year">2024</span>
+          <div class="body">
+            <h2>Product &amp; SSO <span class="kind">Finanshels</span></h2>
+            <p>Core product and single sign-on, internal tools with LLM automations, a unified inbox for WhatsApp, Slack, and Gmail, and an AI bookkeeping system that cut manual accounting work.</p>
+            <p class="stack">Next.js · React · NestJS · Microservices · LLMs</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+
+    <section class="group" aria-labelledby="g-personal">
+      <div class="group-head">
+        <span class="label" id="g-personal">Personal projects</span>
         <span class="label count">03</span>
       </div>
       <ol>
@@ -223,50 +338,6 @@
               <a class="ln" href="https://github.com/nabeel-ncz/bytez" target="_blank" rel="noopener">Code<span class="arr">↗</span></a>
               <a class="ln" href="https://github.com/nabeel-ncz/bytez-k8s-deployment" target="_blank" rel="noopener">K8s setup<span class="arr">↗</span></a>
             </div>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <section class="group" aria-labelledby="g-work">
-      <div class="group-head">
-        <span class="label" id="g-work">Work &amp; clients</span>
-        <span class="label count">04</span>
-      </div>
-      <ol>
-        <li class="item">
-          <span class="label year">2025</span>
-          <div class="body">
-            <h2>eCare <span class="kind">Yanthralabs</span></h2>
-            <p>An enterprise hospital management platform. I built billing, pharmacy, inventory, and reporting, and led the team on a modular microservices setup that lets each hospital pick its own modules.</p>
-            <p class="stack">TypeScript · Microservices · Multi-tenant</p>
-          </div>
-        </li>
-        <li class="item">
-          <span class="label year">2025</span>
-          <div class="body">
-            <h2>QR restaurant ordering <span class="kind">Freelance</span></h2>
-            <p>A multi-tenant ordering platform where every restaurant gets its own subdomain, with real-time orders and AWS infrastructure behind it.</p>
-            <p class="stack">Node.js · WebSocket · AWS</p>
-          </div>
-        </li>
-        <li class="item">
-          <span class="label year">2025</span>
-          <div class="body">
-            <h2>KK Tours &amp; Travels <span class="kind">Freelance</span></h2>
-            <p>A travel agency site with tour booking and an admin dashboard for tours, content, and reviews.</p>
-            <p class="stack">TypeScript · Next.js</p>
-            <div class="links">
-              <a class="ln" href="https://kktoursindia.vercel.app" target="_blank" rel="noopener">Live<span class="arr">↗</span></a>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <span class="label year">2024</span>
-          <div class="body">
-            <h2>Product &amp; SSO <span class="kind">Finanshels</span></h2>
-            <p>Core product and single sign-on, internal tools with LLM automations, a unified inbox for WhatsApp, Slack, and Gmail, and an AI bookkeeping system that cut manual accounting work.</p>
-            <p class="stack">Next.js · React · NestJS · Microservices · LLMs</p>
           </div>
         </li>
       </ol>
